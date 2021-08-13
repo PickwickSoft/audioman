@@ -1,4 +1,5 @@
 import glob
+import os
 import filetype
 
 
@@ -11,7 +12,6 @@ class AudioFileLocator:
         """
         files = []
         all_files = glob.glob(root_dir + "/**/*.*", recursive=True)
-        print(all_files)
         for file in all_files:
             excluded = False
             if str(filetype.guess_mime(file)).startswith("audio/"):
@@ -20,6 +20,6 @@ class AudioFileLocator:
                         excluded = True
                         break
                 if not excluded:
-                    files.append(file)
+                    files.append(os.path.abspath(file))
 
         return files
