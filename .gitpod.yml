@@ -14,3 +14,5 @@ ports:
 vscode:
   extensions:
     - ms-python.python
+    - littlefoxteam.vscode-python-test-adapter
+    - hbenl.vscode-test-explorer
