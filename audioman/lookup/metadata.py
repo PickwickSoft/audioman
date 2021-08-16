@@ -1,4 +1,4 @@
-import musicbrainzngs
+import musicbrainzngs as mb
 import audioman
 
 
@@ -6,6 +6,7 @@ class MetadataLookup:
 
     @staticmethod
     def lookup(recording_id: str) -> dict:
-        musicbrainzngs.set_useragent(
+        mb.set_useragent(
             audioman.__app__, audioman.__version__, audioman.__contact__)
-        return musicbrainzngs.get_recording_by_id(id)
+        data = mb.get_recording_by_id(recording_id, audioman.includes)
+        return data

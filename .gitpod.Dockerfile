@@ -7,4 +7,5 @@ RUN sudo apt-get update \
     && pip install musicbrainzngs \
     && pip install pyacoustid \
     && pip install filetype \
+    && pip install PyInquirer \
     && sudo rm -rf /var/lib/apt/lists/*

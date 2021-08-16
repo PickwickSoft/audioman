@@ -14,11 +14,12 @@ class AudioFileLocator:
         all_files = glob.glob(root_dir + "/**/*.*", recursive=True)
         for file in all_files:
             excluded = False
-            if str(filetype.guess_mime(file)).startswith("audio/"):
+            if filetype.is_audio(file):
                 for dir in excluded_dirs:
-                    if file.startswith(dir):
-                        excluded = True
-                        break
+                    if dir != "" and dir is not None:
+                        if os.path.abspath(file).startswith(os.path.abspath(dir)):
+                            excluded = True
+                            break
                 if not excluded:
                     files.append(os.path.abspath(file))
 
