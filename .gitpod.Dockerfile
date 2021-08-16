@@ -1,9 +1,9 @@
 FROM gitpod/workspace-full
 
 # Install custom tools, runtime, etc.
-RUN apt install python3-mutagen \
-    && pip install pyacoustid \
-    && sudo apt-get install ffmpeg \
+RUN apt-get install -y python3-mutagen \
+    && apt-get -y install ffmpeg \
     && pip install musicbrainzngs \
+    && pip install pyacoustid \
     && pip install filetype \
     && sudo rm -rf /var/lib/apt/lists/*
