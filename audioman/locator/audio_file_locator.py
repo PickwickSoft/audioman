@@ -16,10 +16,9 @@ class AudioFileLocator:
             excluded = False
             if filetype.is_audio(file):
                 for dir in excluded_dirs:
-                    if dir != "" and dir is not None:
-                        if os.path.abspath(file).startswith(os.path.abspath(dir)):
-                            excluded = True
-                            break
+                    if dir != "" and dir is not None and os.path.abspath(file).startswith(os.path.abspath(dir)):
+                        excluded = True
+                        break
                 if not excluded:
                     files.append(os.path.abspath(file))
 

@@ -1,12 +1,14 @@
 #!/usr/bin/python3
 from audioman.fingerprint.identifier import AudioFileIdentifier
 from audioman.locator.audio_file_locator import AudioFileLocator
-from audioman.lookup.metadata import MetadataLookup
-
+from audioman.lookup.metadata_lookup import MetadataLookup
+from audioman.parser.metadata_parser import MetadataParser
 files = AudioFileLocator.locate_files(".")
 print(files)
 identifier = AudioFileIdentifier(files[0])
 id = identifier.identify()
 print('http://musicbrainz.org/recording/%s' % id)
-metadata = MetadataLookup.lookup(str(id))
-print(metadata)
+data = MetadataLookup.lookup(str(id))
+# print(data)
+metadata = MetadataParser(data).parse_metadata()
+print(metadata.artist, metadata.rating, metadata.title, sep=", ")

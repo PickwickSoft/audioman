@@ -5,7 +5,7 @@ class AudioFileIdentifier():
 
     def __init__(self, file: str):
         # The Api Key is from
-        self.__API_KEY = 'y27-1XzhoA8'
+        self.__API_KEY = '40iKuV_n3AM'
         self.__file = file
         self.__id = None
 
