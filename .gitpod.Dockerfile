@@ -8,4 +8,5 @@ RUN sudo apt-get update \
     && pip install pyacoustid \
     && pip install filetype \
     && pip install PyInquirer \
+    && pip install music-tag \
     && sudo rm -rf /var/lib/apt/lists/*

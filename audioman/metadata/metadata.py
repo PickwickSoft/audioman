@@ -4,4 +4,5 @@ class Metadata:
         self.title = ""
         self.artist = ""
         self.recording_id = ""
-        self.rating = ""
+        self.rating = 0
+        self.album = ""

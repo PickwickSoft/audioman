@@ -22,6 +22,7 @@ class MetadataParser:
     def __parse_for_recording_id(self) -> str:
         return self.data['recording']['id']
 
-    def __parse_for_rating(self) -> str:
+    def __parse_for_rating(self) -> int:
         if 'rating' in self.data['recording']:
-            return self.data['recording']['rating']['rating']
+            return int(self.data['recording']['rating']['rating'])
+        return 0
