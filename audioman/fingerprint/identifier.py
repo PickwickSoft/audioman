@@ -6,7 +6,7 @@ class AudioFileIdentifier():
 
     def __init__(self, file: str):
         # The Api Key is from
-        self.__API_KEY = 'rmynFYP_tAY'
+        self.__API_KEY = 'tFWYO0cChAE'
         self.__file = file
         self.__id = None
 
@@ -21,12 +21,16 @@ class AudioFileIdentifier():
                 "Fingerprint could not be calculated")
         except acoustid.WebServiceError as exc:
             raise error.WebServiceError("Web service request failed:", exc.message)
-        result = next(results)
+        try:
+            result = next(results)
+        except StopIteration as exc:
+            raise error.FingerprintGenerationError(
+                "Fingerprint could not be calculated") from exc
         self.__id = result[1]
         return self.__id
 
     def get_id(self) -> str:
-        if self.__id == None:
+        if self.__id is None:
             raise error.FileNotIdentifiedException("Run 'identify()' first")
         return self.__id
 
