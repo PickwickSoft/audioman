@@ -1,6 +1,8 @@
 import glob
+import mimetypes
 import os
 import filetype
+import magic
 
 
 class AudioFileLocator:
@@ -14,7 +16,7 @@ class AudioFileLocator:
         all_files = glob.glob(root_dir + "/**/*.*", recursive=True)
         for file in all_files:
             excluded = False
-            if filetype.is_audio(file):
+            if str(magic.Magic(mime=True).from_file(file)).startswith("audio/"):
                 for dir in excluded_dirs:
                     if dir != "" and dir is not None and os.path.abspath(file).startswith(os.path.abspath(dir)):
                         excluded = True
