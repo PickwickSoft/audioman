@@ -1,7 +1,6 @@
 import glob
 import mimetypes
 import os
-import filetype
 import magic
 
 
