@@ -8,4 +8,5 @@ RUN sudo apt-get update \
     && pip3 install pyacoustid \
     && pip3 install python-magic==0.4.24 \
     && pip3 install PyInquirer \
-    && sudo rm -rf /var/lib/apt/lists/*
+    && sudo rm -rf /var/lib/apt/lists/* \
+    && chmod 777 tools/*
