@@ -11,6 +11,8 @@ class TerminalAlbumChooser(AlbumChooser):   # pylint: disable=too-few-public-met
 
     def choose_album(self, albums: list) -> list:
         self.__album_lists = albums
+        if len(albums) == 1:
+            return albums[0]
         for i in range(len(albums)):   # pylint: disable=consider-using-enumerate
             if 'date' in albums[i]:
                 self.__choices.append(
