@@ -5,6 +5,7 @@ from audioman.parser.metadata_parser import MetadataParser
 from audioman.metadata.tagger import AudioTagger
 from audioman.files.structure import Structure, FolderStructure, FileNameStructure
 from audioman.files.restructure import FileRestructurer
+from audioman.cli import TerminalAlbumChooser
 
 files = AudioFileLocator.locate_files(".", "test")
 print(files)
@@ -17,8 +18,7 @@ id = identifier.identify()
 print('http://musicbrainz.org/recording/%s' % id)
 
 data = MetadataLookup.lookup(str(id))
-metadata = MetadataParser(data).parse_metadata()
-metadata.album = "The Best of"
+metadata = MetadataParser(data, TerminalAlbumChooser(files[0])).parse_metadata()
 print(metadata.artist, metadata.rating, metadata.title, sep=", ")
 
 tagger = AudioTagger.get_tagger(files[0])

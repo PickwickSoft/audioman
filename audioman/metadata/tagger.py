@@ -2,7 +2,7 @@ import os
 from abc import ABC, abstractmethod
 from audioman.metadata.metadata import Metadata
 from mutagen import File
-from mutagen.id3 import ID3, POPM, TIT2, TPE1
+from mutagen.id3 import ID3, POPM, TIT2, TPE1, TALB, TDRC
 
 
 class Tagger(ABC):
@@ -42,13 +42,13 @@ class ID3Tagger(Tagger):
 
     def __init__(self, file):
         self.file = ID3(file)
-        # if self.file.tags is None:
-        # self.file.add_tags()
         self.audio = self.file
 
     def tag(self, metadata: Metadata):
         self.audio.add(TIT2(encoding=3, text=metadata.title))
         self.audio.add(TPE1(encoding=3, text=metadata.artist))
+        self.audio.add(TALB(encoding=3, text=metadata.album))
+        self.audio.add(TDRC(encoding=3, text=metadata.date))
         self.audio.add(POPM(rating=metadata.rating))
 
     def save(self):
@@ -65,7 +65,9 @@ class NonID3Tagger(Tagger):
     def tag(self, metadata: Metadata):
         self.audio["title"] = metadata.title
         self.audio["artist"] = metadata.artist
+        self.audio["album"] = metadata.album
         self.audio["rating"] = str(metadata.rating)
+        self.audio["date"] = metadata.date
 
     def save(self):
         self.audio.save()
@@ -82,6 +84,8 @@ class ID3CompatibleFileTagger(Tagger):
     def tag(self, metadata: Metadata):
         self.audio.add(TIT2(encoding=3, text=metadata.title))
         self.audio.add(TPE1(encoding=3, text=metadata.artist))
+        self.audio.add(TALB(encoding=3, text=metadata.album))
+        self.audio.add(TDRC(encoding=3, text=metadata.date))
         self.audio.add(POPM(rating=metadata.rating))
 
     def save(self):

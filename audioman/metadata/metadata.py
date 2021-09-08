@@ -6,3 +6,4 @@ class Metadata:
         self.recording_id = ""
         self.rating = 0
         self.album = ""
+        self.date = ""
