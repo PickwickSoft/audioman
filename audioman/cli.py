@@ -1,20 +1,22 @@
 from InquirerPy import inquirer
 from audioman.parser.metadata_parser import AlbumChooser
 
-class TerminalAlbumChooser(AlbumChooser):
+
+class TerminalAlbumChooser(AlbumChooser):   # pylint: disable=too-few-public-methods
 
     def __init__(self, file):
-        self.choices = []
+        self.__choices = []
         self.file = file
-        self.album_lists = []
+        self.__album_lists = []
 
     def choose_album(self, albums: list) -> list:
-        self.album_lists = albums
-        for i in range(len(albums)):
+        self.__album_lists = albums
+        for i in range(len(albums)):   # pylint: disable=consider-using-enumerate
             if 'date' in albums[i]:
-                self.choices.append({"name": "{0} - {1}".format(albums[i]['title'], albums[i]['date']), "value": i})
+                self.__choices.append(
+                    {"name": "{0} - {1}".format(albums[i]['title'], albums[i]['date']), "value": i})
             else:
-                self.choices.append(
+                self.__choices.append(
                     {"name": "{0}".format(albums[i]['title']), "value": i})
 
         return self.__select_album_cli()
@@ -23,6 +25,6 @@ class TerminalAlbumChooser(AlbumChooser):
         print("The file {} has multiple Albums available".format(self.file))
         result = inquirer.select(
             message="Select the album",
-            choices=self.choices
+            choices=self.__choices
         ).execute()
-        return self.album_lists[result]
+        return self.__album_lists[result]
