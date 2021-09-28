@@ -8,4 +8,5 @@ RUN sudo apt-get update \
     && pip3 install pyacoustid \
     && pip3 install python-magic==0.4.24 \
     && pip3 install InquirerPy \
+    && pip3 install typer[all] \
     && sudo rm -rf /var/lib/apt/lists/*

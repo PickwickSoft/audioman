@@ -18,8 +18,8 @@ class FileRestructurer:
             self.root, self.__create_file_name_structure() + "." + file.split(".")[-1]))
 
     def __create_dir_structure(self):
-        dir_path = self.struct.folder_struct.name.replace("__", "/").lower().replace(
-            "_", " - ").replace("artist", self.meta.artist).replace("album", self.meta.album)
+        dir_path = self.struct.folder_struct.name.replace(
+            "artist", self.meta.artist).replace("album", self.meta.album)
         dir_path = self.root + dir_path
         dirs = dir_path.split("/")
         root = self.root
@@ -41,9 +41,7 @@ class FileRestructurer:
         else:
             return (
                 self.struct.file_struct.name.lower()
-                .replace("__", ".")
-                .replace("_", " - ")
-                .replace("number", "00")
+                .replace("nr", "00")
                 .replace("artist", self.meta.artist)
                 .replace("title", self.meta.title)
             )
