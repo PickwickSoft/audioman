@@ -133,3 +133,6 @@ dmypy.json
 
 # The folder containing test audiofiles
 test
+
+# Pycharm
+.idea
