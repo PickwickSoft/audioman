@@ -1,0 +1,6 @@
+mutagen~=1.45.1
+inquirerpy~=0.2.4
+musicbrainzngs~=0.7.1
+python-magic~=0.4.24
+typer~=0.4.0
+pyacoustid~=1.2.2
