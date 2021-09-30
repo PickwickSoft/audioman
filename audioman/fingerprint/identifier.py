@@ -2,7 +2,7 @@ import acoustid
 import audioman.errors.exceptions as error
 
 
-class AudioFileIdentifier():
+class AudioFileIdentifier:
 
     def __init__(self, file: str):
         # The Api Key is from

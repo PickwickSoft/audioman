@@ -1,6 +1,7 @@
-import shutil
 import os
-from audioman.files.structure import Structure, FolderStructure, FileNameStructure
+import shutil
+
+from audioman.files.structure import Structure, FileNameStructure
 from audioman.metadata.metadata import Metadata
 
 

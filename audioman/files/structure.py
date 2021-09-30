@@ -31,17 +31,17 @@ class FileNameStructure(StructureElement, Enum):
             return "ARTIST (ALBUM) - NR - TITLE"
         return self.name.replace("__", ".").replace("_", " - ")
 
-    NR_TITLE=0
-    ARTIST_TITLE=1
-    ARTIST_NR_TITLE=2
-    ARTIST_ALBUM_NR_TITLE=3
-    TITLE=4
-    NR__ARTIST_TITLE=5
+    NR_TITLE = 0
+    ARTIST_TITLE = 1
+    ARTIST_NR_TITLE = 2
+    ARTIST_ALBUM_NR_TITLE = 3
+    TITLE = 4
+    NR__ARTIST_TITLE = 5
 
 
 class Structure:
 
     def __init__(self, folder_struct: FolderStructure,
                  file_struct: FileNameStructure):
-        self.folder_struct=folder_struct
-        self.file_struct=file_struct
+        self.folder_struct = folder_struct
+        self.file_struct = file_struct

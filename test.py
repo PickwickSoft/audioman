@@ -7,7 +7,7 @@ from audioman.files.structure import Structure, FolderStructure, FileNameStructu
 from audioman.files.restructure import FileRestructurer
 from audioman.cli import TerminalAlbumChooser
 
-files = AudioFileLocator.locate_files(".", "test")
+files = AudioFileLocator(".", ["test"]).locate_files()
 print(files)
 
 if len(files) == 0:
