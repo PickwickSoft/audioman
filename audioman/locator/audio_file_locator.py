@@ -1,22 +1,25 @@
 import glob
-import mimetypes
 import os
+
 import magic
 
 
 class AudioFileLocator:
 
-    @staticmethod
-    def locate_files(root_dir: str, *excluded_dirs: str) -> list:
+    def __init__(self, root_dir: str, *excluded_dirs: list):
+        self.root = root_dir
+        self.excluded_dirs = excluded_dirs
+
+    def locate_files(self) -> list:
         """
         Get recursively all audio files starting at the given root_dir
         """
         files = []
-        all_files = glob.glob(root_dir + "/**/*.*", recursive=True)
+        all_files = self.__get_files_recursive()
         for file in all_files:
             excluded = False
-            if str(magic.Magic(mime=True).from_file(file)).startswith("audio/"):
-                for dir in excluded_dirs:
+            if self.__is_audio_file(file):
+                for dir in self.excluded_dirs:
                     if dir != "" and dir is not None and os.path.abspath(file).startswith(os.path.abspath(dir)):
                         excluded = True
                         break
@@ -24,3 +27,11 @@ class AudioFileLocator:
                     files.append(os.path.abspath(file))
 
         return files
+
+    def __get_files_recursive(self):
+        result = glob.glob(self.root + "/**/*.*", recursive=True)
+        return [element for element in result if os.path.isfile(element)]
+
+    @staticmethod
+    def __is_audio_file(file):
+        return str(magic.Magic(mime=True).from_file(file)).startswith("audio/")

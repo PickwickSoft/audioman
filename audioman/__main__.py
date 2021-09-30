@@ -1,20 +1,18 @@
 import typer
-from InquirerPy import inquirer
+from typing import List, Optional
 from audioman.cli import CLITools
-from audioman.files.structure import FileNameStructure, FolderStructure
+from audioman.locator.audio_file_locator import AudioFileLocator
 
 
-def main(source: str):
+def main(source: str,
+         exclude: Optional[List[str]] = typer.Option([], "--exclude", "-e", help="Files or Directories to exclude",
+                                                     case_sensitive=False)):
     # Print the logo
     typer.echo(CLITools.logo)
-    folders = [{"name": struct.human_readable(), "value": struct}
-               for struct in FolderStructure]
-    files = [{"name": struct.human_readable(), "value": struct}
-             for struct in FileNameStructure]
-    folder_structure = inquirer.select(message="Select a folder structure",
-                    choices=folders, default=FolderStructure.ARTIST__ALBUM).execute()
-    file_structure = inquirer.select(message="Select a filename structure",
-                                       choices=files, default=FileNameStructure.NR_TITLE).execute()
+    print(exclude)
+    files = AudioFileLocator(source, exclude).locate_files()
+    folderstruct = CLITools.folder_structure_chooser()
+    filestruct = CLITools.file_structure_chooser()
 
 
 if __name__ == "__main__":
