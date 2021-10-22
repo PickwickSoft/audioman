@@ -6,9 +6,11 @@ import magic
 
 class AudioFileLocator:
 
-    def __init__(self, root_dir: str, *excluded_dirs: list):
+    def __init__(self, root_dir: str, *excluded_dirs):
         self.root = root_dir
-        self.excluded_dirs = excluded_dirs
+        self.excluded_items = []
+        for i in list(excluded_dirs[0]):
+            self.excluded_items.append(os.path.abspath(i))
 
     def locate_files(self) -> list:
         """
@@ -19,8 +21,8 @@ class AudioFileLocator:
         for file in all_files:
             excluded = False
             if self.__is_audio_file(file):
-                for dir in self.excluded_dirs:
-                    if dir[0] != "" and dir[0] is not None and os.path.abspath(file).startswith(os.path.abspath(dir[0])):
+                for dir in self.excluded_items:
+                    if os.path.abspath(file).startswith(dir):
                         excluded = True
                         break
                 if not excluded:
