@@ -136,3 +136,6 @@ test
 
 # Pycharm
 .idea
+
+# Test files
+*.mp3
