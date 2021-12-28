@@ -7,14 +7,14 @@ from audioman.files.structure import Structure, FolderStructure, FileNameStructu
 from audioman.files.restructure import FileRestructurer
 from audioman.cli import TerminalAlbumChooser
 
-files = AudioFileLocator(".", ["test"]).locate_files()
+files = AudioFileLocator(".", ()).locate_files()
 print(files)
 
 if len(files) == 0:
     exit(0)
 
 identifier = AudioFileIdentifier(files[0])
-id = identifier.identify()
+id = identifier.identify
 print('http://musicbrainz.org/recording/%s' % id)
 
 data = MetadataLookup.lookup(str(id))
@@ -26,4 +26,4 @@ tagger.tag(metadata)
 tagger.save()
 
 FileRestructurer("./", Structure(FolderStructure.ARTIST_ALBUM,
-                 FileNameStructure.ARTIST_TITLE)).move(files[0], metadata)
+                                 FileNameStructure.ARTIST_TITLE)).move(files[0], metadata)
