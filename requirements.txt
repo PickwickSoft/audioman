@@ -4,3 +4,5 @@ musicbrainzngs~=0.7.1
 python-magic~=0.4.24
 typer~=0.4.0
 pyacoustid~=1.2.2
+rich~=10.12.0
+requests~=2.22.0

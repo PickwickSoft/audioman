@@ -1,18 +1,20 @@
 import acoustid
+
 import audioman.errors.exceptions as error
+from audioman.fingerprint.api import get_api_key
 
 
 class AudioFileIdentifier:
 
     def __init__(self, file: str):
         # The Api Key is from
-        self.__API_KEY = 'tFWYO0cChAE'
+        self.__API_KEY = get_api_key()
         self.__file = file
         self.__id = None
 
     def identify(self) -> str:
         try:
-            results = acoustid.match(self.__API_KEY, self.__file)
+            results = acoustid.match(self.__API_KEY, self.__file, force_fpcalc=True)
         except acoustid.NoBackendError:
             raise error.ChromaprintNotFoundException(
                 "Chromaprint library/tool not found")
