@@ -18,15 +18,15 @@ class TerminalAlbumChooser(AlbumChooser):  # pylint: disable=too-few-public-meth
         for i in range(len(albums)):  # pylint: disable=consider-using-enumerate
             if 'date' in albums[i]:
                 self.__choices.append(
-                    {"name": "{0} - {1}".format(albums[i]['title'], albums[i]['date']), "value": i})
+                    {"name": f"{albums[i]['title']} - {albums[i]['date']}", "value": i})
             else:
                 self.__choices.append(
-                    {"name": "{0}".format(albums[i]['title']), "value": i})
+                    {"name": f"{albums[i]['title']}", "value": i})
 
         return self.__select_album_cli()
 
     def __select_album_cli(self) -> list:
-        print("The file {} has multiple Albums available".format(self.file))
+        print(f"The file {self.file} has multiple Albums available")
         result = inquirer.select(
             message="Select the album",
             choices=self.__choices
