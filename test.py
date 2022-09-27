@@ -15,7 +15,7 @@ if len(files) == 0:
 
 identifier = AudioFileIdentifier(files[0])
 id = identifier.identify
-print('http://musicbrainz.org/recording/%s' % id)
+print(f'http://musicbrainz.org/recording/{id}')
 
 data = MetadataLookup.lookup(str(id))
 metadata = MetadataParser(data, TerminalAlbumChooser(files[0])).parse_metadata()

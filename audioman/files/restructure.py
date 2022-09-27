@@ -15,8 +15,13 @@ class FileRestructurer:
     def move(self, file: str, meta: Metadata):
         self.meta = meta
         self.__create_dir_structure()
-        shutil.move(file, os.path.join(
-            self.root, self.__create_file_name_structure() + "." + file.split(".")[-1]))
+        shutil.move(
+            file,
+            os.path.join(
+                self.root,
+                f"{self.__create_file_name_structure()}." + file.split(".")[-1],
+            ),
+        )
 
     def __create_dir_structure(self):
         dir_path = self.struct.folder_struct.human_readable().lower().replace(

@@ -18,10 +18,8 @@ def get_api_key() -> str:
     """
     url = 'https://acoustid.org/webservice'
     html = requests.get(url)
-    match = re.search(table_pattern, html.text)
-    if match:
-        match = re.search(id_section_pattern, match.group())
-        if match:
+    if match := re.search(table_pattern, html.text):
+        if match := re.search(id_section_pattern, match.group()):
             return match.group().replace("<td>", "").replace("</td>", "")
     else:
         print("No API Key found", file=sys.stderr)
