@@ -8,9 +8,7 @@ class AudioFileLocator:
 
     def __init__(self, root_dir: str, *excluded_dirs):
         self.root = root_dir
-        self.excluded_items = []
-        for i in list(excluded_dirs[0]):
-            self.excluded_items.append(os.path.abspath(i))
+        self.excluded_items = [os.path.abspath(i) for i in list(excluded_dirs[0])]
 
     def locate_files(self) -> list:
         """
@@ -31,7 +29,7 @@ class AudioFileLocator:
         return files
 
     def __get_files_recursive(self):
-        result = glob.glob(self.root + "/**/*.*", recursive=True)
+        result = glob.glob(f"{self.root}/**/*.*", recursive=True)
         return [element for element in result if os.path.isfile(element)]
 
     @staticmethod
